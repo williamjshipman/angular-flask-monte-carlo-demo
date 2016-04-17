@@ -12,11 +12,11 @@ If you're using Anaconda then
 
 Flask-SocketIO and eventlet both get installed with pip:
 
-   pip install eventlet
-   pip install Flask-SocketIO
+    pip install eventlet
+    pip install Flask-SocketIO
 
 After that, just run
 
-   python app.py
+    python app.py
 
 The web server should start serving the site at http://localhost:5000
