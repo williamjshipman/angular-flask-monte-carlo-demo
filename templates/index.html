@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MyApp">
+  <head>
+    <meta charset="utf-8">
+    <script src="/static/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/socket.io.js"></script>
+
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    
+    <script src="/static/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/ui-bootstrap-tpls-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular-touch.min.js"></script>
+
+    <script type="text/javascript" src="/static/js/angular-toastr.tpls.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css">
+    
+    <script src="/static/js/mainapp.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <title>Flask - Tutorial</title>
+  </head>
+  <body data-ng-controller="ProjectTasksController as ctrl">
+    <div class="row">
+      <div class="col-md-1" style="text-align: right">
+        <label>Task name</label>
+      </div>
+      <div class="col-md-6" style="text-align: left"><input ng-model="ctrl.task_description"></input></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1" style="text-align: right">
+        <label>Expected duration</label>
+      </div>
+      <div class="col-md-6" style="text-align: left"><input ng-model="ctrl.task_duration"></input></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1" style="text-align: right">
+        <label>One sigma duration</label>
+      </div>
+      <div class="col-md-6" style="text-align: left"><input ng-model="ctrl.task_one_sigma"></input></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <button class="btn btn-primary" ng-click="ctrl.AddTask()">Add task</button>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-primary" ng-click="ctrl.StartSimulation()">Start simulation</button>
+      </div>
+    </div>
+
+    <hr>
+    <h2>Task list</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>Description</td>
+            <td>Expected duration (days)</td>
+            <td>One sigma distance (days)</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="task in ctrl.tasks_list">
+            <td>[[task.description]]</td>
+            <td>[[task.mean_duration]]</td>
+            <td>[[task.one_sigma]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+    <h2>Simulation progress</h2>
+    <div>
+      <label>Simulation progress (loops completed):</label>
+      <uib-progressbar max="ctrl.simulation.total_loops" value="ctrl.simulation.current_loop">[[ctrl.simulation.current_loop]] / [[ctrl.simulation.total_loops]]</uib-progressbar>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-md-1" style="text-align: right">
+          <label>Mean duration:</label>
+        </div>
+        <div class="col-md-6" style="text-align: left">[[ctrl.simulation.mean_duration]]</div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" style="text-align: right">
+          <label>Duration deviation:</label>
+        </div>
+        <div class="col-md-6" style="text-align: left">[[ctrl.simulation.stddev_duration]]</div>
+      </div>
+    </div>
+  </body>
+</html>
